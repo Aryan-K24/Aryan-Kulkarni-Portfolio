@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aryan Kulkarni — Build Log</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #E9EEF1;
+    --paper-dim: #DCE4E8;
+    --ink: #16232B;
+    --ink-soft: #445560;
+    --blue: #2B5C8A;
+    --signal: #C1440E;
+    --line: #9FB3BF;
+    --line-faint: rgba(43,92,138,0.18);
+    --radius: 2px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background:
+      linear-gradient(var(--line-faint) 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(90deg, var(--line-faint) 1px, transparent 1px) 0 0/40px 40px,
+      var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+
+  .mono{ font-family: 'IBM Plex Mono', monospace; }
+
+  .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .eyebrow::before{
+    content: '';
+    width: 8px; height: 8px;
+    border: 1.5px solid var(--blue);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .reg-corners{ position: relative; }
+  .reg-corners::before,
+  .reg-corners::after,
+  .reg-corners .rc-tl,
+  .reg-corners .rc-br{
+    content: '';
+    position: absolute;
+    width: 14px; height: 14px;
+    pointer-events: none;
+  }
+  .reg-corners::before{
+    top: -1px; left: -1px;
+    border-top: 1.5px solid var(--blue);
+    border-left: 1.5px solid var(--blue);
+  }
+  .reg-corners::after{
+    bottom: -1px; right: -1px;
+    border-bottom: 1.5px solid var(--blue);
+    border-right: 1.5px solid var(--blue);
+  }
+
+  header.nav{
+    position: sticky; top: 0; z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 48px;
+    background: rgba(233,238,241,0.86);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line-faint);
+  }
+  .brand{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+  .brand span{ color: var(--signal); }
+  nav.links{ display: flex; gap: 32px; }
+  nav.links a{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    text-decoration: none;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    position: relative;
+    padding-bottom: 3px;
+  }
+  nav.links a::after{
+    content:'';
+    position:absolute; left:0; bottom:0;
+    width:0; height:1.5px; background: var(--signal);
+    transition: width 0.25s ease;
+  }
+  nav.links a:hover::after{ width: 100%; }
+
+  .hero{
+    padding: 96px 48px 80px;
+    max-width: 1180px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-top{
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 40px;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .rev-stamp{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    padding: 6px 12px;
+    text-align: right;
+    line-height: 1.6;
+  }
+  .rev-stamp b{ color: var(--signal); }
+
+  h1.title{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(42px, 6.2vw, 84px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    max-width: 16ch;
+  }
+  h1.title .accent{ color: var(--blue); }
+
+  .hero-sub{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    margin-top: 44px;
+    align-items: end;
+    border-top: 1px solid var(--line-faint);
+    padding-top: 28px;
+  }
+  .hero-desc{
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+  .cta-stamp{
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--signal);
+    color: var(--paper);
+    padding: 16px 26px;
+    text-decoration: none;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .cta-stamp:hover{ transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
+  .cta-stamp:active{ transform: translate(0,0); box-shadow: 2px 2px 0 var(--ink); }
+
+  section{ max-width: 1180px; margin: 0 auto; padding: 64px 48px; }
+  .section-head{
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 40px; flex-wrap: wrap; gap: 12px;
+    border-bottom: 1px solid var(--line-faint);
+    padding-bottom: 18px;
+  }
+  h2.section-title{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    letter-spacing: -0.01em;
+  }
+  .count-tag{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .spec-card{
+    background: var(--paper-dim);
+    border: 1px solid var(--line);
+    padding: 28px 26px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .spec-card:hover{
+    transform: translateY(-3px);
+    box-shadow: 5px 5px 0 var(--line-faint);
+  }
+  .spec-card-head{
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+  }
+  .spec-card h3{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 21px;
+    font-weight: 600;
+  }
+  .status-pill{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .spec-card p.desc{ color: var(--ink-soft); font-size: 14.5px; }
+  .stack-row{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .stack-tag{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    padding: 3px 8px;
+  }
+  .spec-links{
+    display: flex; gap: 18px; margin-top: auto; padding-top: 12px;
+    border-top: 1px dashed var(--line);
+  }
+  .spec-links a{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    text-decoration: none;
+    color: var(--blue);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .spec-links a:hover{ color: var(--signal); }
+  .spec-links a::after{ content: '→'; transition: transform 0.15s ease; }
+  .spec-links a:hover::after{ transform: translateX(2px); }
+
+  .about-wrap{
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px;
+  }
+  .log-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .log-entry{
+    display: flex; gap: 18px; padding: 16px 0;
+    border-bottom: 1px solid var(--line-faint);
+  }
+  .log-entry:last-child{ border-bottom: none; }
+  .log-date{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; color: var(--blue); flex-shrink: 0; width: 92px;
+  }
+  .log-text{ font-size: 14.5px; color: var(--ink-soft); }
+  .log-text b{ color: var(--ink); font-weight: 600; }
+
+  .about-copy p{ margin-bottom: 16px; font-size: 16px; color: var(--ink-soft); }
+  .about-copy p:first-child{ font-size: 18px; color: var(--ink); }
+
+  .contact-panel{
+    border: 1px solid var(--ink);
+    padding: 44px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    background: var(--paper-dim);
+  }
+  .contact-left h2{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 34px; font-weight: 700; letter-spacing: -0.01em;
+    margin-bottom: 14px;
+  }
+  .contact-left p{ color: var(--ink-soft); max-width: 42ch; margin-bottom: 24px; }
+  .contact-list{ display: flex; flex-direction: column; gap: 0; }
+  .contact-row{
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 0; border-bottom: 1px dashed var(--line);
+    font-family: 'IBM Plex Mono', monospace; font-size: 13.5px;
+  }
+  .contact-row:last-child{ border-bottom: none; }
+  .contact-row span.label{ color: var(--ink-soft); text-transform: uppercase; font-size: 11px; letter-spacing: 0.08em; }
+  .contact-row a{ text-decoration: none; color: var(--ink); }
+  .contact-row a:hover{ color: var(--signal); }
+
+  footer{
+    text-align: center; padding: 32px 48px 48px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px; color: var(--ink-soft);
+  }
+
+  @media (max-width: 860px){
+    header.nav{ padding: 16px 20px; }
+    nav.links{ gap: 18px; }
+    .hero{ padding: 64px 20px 56px; }
+    .hero-sub{ grid-template-columns: 1fr; align-items: start; }
+    section{ padding: 48px 20px; }
+    .grid{ grid-template-columns: 1fr; }
+    .about-wrap{ grid-template-columns: 1fr; }
+    .contact-panel{ grid-template-columns: 1fr; padding: 28px; }
+    nav.links a:nth-child(3){ display:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ transition: none !important; }
+  }
+
+  :focus-visible{
+    outline: 2px solid var(--signal);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="brand">ARYAN KULKARNI <span>//</span> BUILD LOG</div>
+    <nav class="links">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#philosophy">Philosophy</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-top">
+      <div class="eyebrow">AI/ML Student · Product Builder</div>
+      <div class="rev-stamp mono">
+        REV <b>04</b> · JUL 2026<br>
+        STATUS: <b>ACTIVELY BUILDING</b>
+      </div>
+    </div>
+
+    <h1 class="title">Turning ideas into <span class="accent">products people use.</span></h1>
+
+    <div class="hero-sub">
+      <p class="hero-desc">
+        Six deployed products across finance, e-commerce, education, and AI tooling. I don't stop at the notebook—I ship products, learn from real users, and keep improving them.
+      
+      <a class="cta-stamp" style="margin-top: 20px;" href="#contact">Get in touch ↓</a>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <h2 class="section-title">Shipped Work</h2>
+      <div class="count-tag">06 / 06 LIVE</div>
+    </div>
+
+    <div class="grid">
+
+      <div class="spec-card reg-corners">
+        <div class="spec-card-head">
+          <h3>Budget Buddy</h3>
+          <span class="status-pill">v4 · Live</span>
+        </div>
+        <p class="desc">Helps students and young professionals manage expenses, plan savings, and track recurring payments through a mobile-first finance app — built solo, now on its fourth Android release.</p>
+        <div class="stack-row">
+          <span class="stack-tag">Firebase</span>
+          <span class="stack-tag">PWA</span>
+          <span class="stack-tag">JavaScript</span>
+          <span class="stack-tag">Android TWA</span>
+        </div>
+        <div class="spec-links">
+          <a href="https://budgetbuddytrackerapp.netlify.app" target="_blank" rel="noopener">Live app</a>
+          <a href="https://github.com/Aryan-K24/Budget-Buddy-" target="_blank" rel="noopener">Source</a>
+        </div>
+      </div>
+
+      <div class="spec-card reg-corners">
+        <div class="spec-card-head">
+          <h3>Sagecampus</h3>
+          <span class="status-pill">v1 · Live</span>
+        </div>
+        <p class="desc">Helps Indian students discover and compare colleges using real NIRF ranking data, cutting through scattered admissions info. "Find your college, backed by NIRF data."</p>
+        <div class="stack-row">
+          <span class="stack-tag">Next.js</span>
+          <span class="stack-tag">TypeScript</span>
+          <span class="stack-tag">Tailwind</span>
+          <span class="stack-tag">shadcn/ui</span>
+        </div>
+        <div class="spec-links">
+          <a href="https://sagecampus-pink.vercel.app/" target="_blank" rel="noopener">Live app</a>
+          <a href="https://github.com/Aryan-K24/Sage-Campus" target="_blank" rel="noopener">Source</a>
+        </div>
+      </div>
+
+      <div class="spec-card reg-corners">
+        <div class="spec-card-head">
+          <h3>ShopKaro</h3>
+          <span class="status-pill">v1 · Live</span>
+        </div>
+        <p class="desc">Built to understand how modern e-commerce works from scratch — including authentication, cart management, filtering, checkout, and persistent state without using frameworks.</p>
+        <div class="stack-row">
+          <span class="stack-tag">JavaScript</span>
+          <span class="stack-tag">HTML/CSS</span>
+        </div>
+        <div class="spec-links">
+          <a href="https://aryan-k24.github.io/ShopKaro/" target="_blank" rel="noopener">Live app</a>
+          <a href="https://github.com/Aryan-K24/ShopKaro" target="_blank" rel="noopener">Source</a>
+        </div>
+      </div>
+
+      <div class="spec-card reg-corners">
+        <div class="spec-card-head">
+          <h3>HabitFlow</h3>
+          <span class="status-pill">v1 · Live</span>
+        </div>
+        <p class="desc">Helps you build consistency by tracking habits with calendar and analytics views — streaks, achievements, and a hand-rolled progress chart, all rendered as derived views over a single reducer.</p>
+        <div class="stack-row">
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">JavaScript</span>
+        </div>
+        <div class="spec-links">
+          <a href="https://habitflow-five-sigma.vercel.app/" target="_blank" rel="noopener">Live app</a>
+          <a href="https://github.com/Aryan-K24/habitflow" target="_blank" rel="noopener">Source</a>
+        </div>
+      </div>
+
+      <div class="spec-card reg-corners">
+        <div class="spec-card-head">
+          <h3>StreamAI</h3>
+          <span class="status-pill">v1 · Live</span>
+        </div>
+        <p class="desc">A streaming AI chat assistant for asking questions, writing, and planning — renders responses token-by-token as they arrive instead of waiting on the full reply.</p>
+        <div class="stack-row">
+          <span class="stack-tag">Next.js</span>
+          <span class="stack-tag">TypeScript</span>
+        </div>
+        <div class="spec-links">
+          <a href="https://stream-ai-chat-five.vercel.app/" target="_blank" rel="noopener">Live app</a>
+          <a href="https://github.com/Aryan-K24/Stream-Ai-chat" target="_blank" rel="noopener">Source</a>
+        </div>
+      </div>
+
+      <div class="spec-card reg-corners">
+        <div class="spec-card-head">
+          <h3>Velora Clothing</h3>
+          <span class="status-pill">v1 · Live</span>
+        </div>
+        <p class="desc">A direct-to-consumer fashion storefront concept — built to demonstrate modern e-commerce UX and a responsive shopping experience, not just a landing page.</p>
+        <div class="stack-row">
+          <span class="stack-tag">JavaScript</span>
+          <span class="stack-tag">Netlify</span>
+        </div>
+        <div class="spec-links">
+          <a href="https://veloraclothingco.netlify.app" target="_blank" rel="noopener">Live app</a>
+          <a href="https://github.com/Aryan-K24/Velora-" target="_blank" rel="noopener">Source</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-head">
+      <h2 class="section-title">About</h2>
+      <div class="count-tag">SEM 03 · AI/ML</div>
+    </div>
+
+    <div class="about-wrap">
+      <div class="log-list">
+        <div class="log-entry">
+          <div class="log-date mono">NOW</div>
+          <div class="log-text"><b>Interning at FlyRank AI</b>, applying AI/ML coursework to real product work.</div>
+        </div>
+        <div class="log-entry">
+          <div class="log-date mono">RV UNI</div>
+          <div class="log-text"><b>B.Tech Honours, AI/ML</b> major with a minor in Design Thinking & Entrepreneurship.</div>
+        </div>
+        <div class="log-entry">
+          <div class="log-date mono">FOSS</div>
+          <div class="log-text"><b>Secretary, FOSS Club.</b> Also active in NSS, The Representatives, and Iterium Club.</div>
+        </div>
+        <div class="log-entry">
+          <div class="log-date mono">CERTS</div>
+          <div class="log-text"><b>IBM SkillsBuild</b> certifications in AI/ML fundamentals.</div>
+        </div>
+      </div>
+
+      <div class="about-copy">
+        <p>I learn by building and shipping. Every project on this site started as a problem I wanted to solve—not an assignment I had to finish. Building has become my way of learning, challenging myself, and turning ideas into products people can actually use.</p>
+        <p>Curiosity is where every project begins. I enjoy figuring out what it takes to turn an idea into reality.</p>
+        <p>I think in systems, not one-off goals: build the habit, the tool follows. That's shown up in how Budget Buddy has gone through four real versions instead of staying a weekend project — and it's how I plan to build everything after this.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="philosophy">
+    <div class="section-head">
+      <h2 class="section-title">Build Philosophy</h2>
+      <div class="count-tag">WHY I BUILD</div>
+    </div>
+    <div class="about-copy" style="max-width: 62ch;">
+      <p>I'm someone who's still becoming the person I want to be, and building is how I get there. I don't build projects just to complete assignments — I build products to solve real problems. Every project teaches me something new, whether it's a technology, a better workflow, or a different way of thinking. My long-term goal is to turn ideas into products that people genuinely use and value, and one day grow them into businesses that make a meaningful impact.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-panel reg-corners">
+      <div class="contact-left">
+        <h2>Let's talk.</h2>
+        <p>Open to internships, startup collaborations, and opportunities to learn, build, and contribute to meaningful ideas that create real impact.</p>
+        <a class="cta-stamp" href="mailto:kulkarni.aryan247@gmail.com">Email me →</a>
+      </div>
+      <div class="contact-list">
+        <div class="contact-row">
+          <span class="label">Email</span>
+          <a href="mailto:kulkarni.aryan247@gmail.com">kulkarni.aryan247@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="label">GitHub</span>
+          <a href="https://github.com/Aryan-K24" target="_blank" rel="noopener">github.com/Aryan-K24</a>
+        </div>
+        <div class="contact-row">
+          <span class="label">LinkedIn</span>
+          <a href="https://www.linkedin.com/in/aryan-kulkarni24/" target="_blank" rel="noopener">linkedin.com/in/aryan-kulkarni24</a>
+        </div>
+        <div class="contact-row">
+          <span class="label">Résumé</span>
+          <a href="resume.pdf" download>Download PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    BUILT BY ARYAN KULKARNI · BENGALURU · REV 04 · 2026
+  </footer>
+
+</body>
+</html>
