@@ -302,6 +302,70 @@
   .about-copy p{ margin-bottom: 16px; font-size: 16px; color: var(--ink-soft); }
   .about-copy p:first-child{ font-size: 18px; color: var(--ink); }
 
+  .message-section{
+    border-top: 1px solid var(--line-faint);
+    padding-top: 44px;
+  }
+
+  .message-form{
+    max-width: 760px;
+    border: 1px solid var(--ink);
+    padding: 28px;
+    background: var(--paper-dim);
+    display: grid;
+    gap: 18px;
+  }
+
+  .message-form .form-intro{
+    color: var(--ink-soft);
+    max-width: 55ch;
+    margin-bottom: 6px;
+  }
+
+  .form-field{
+    display: grid;
+    gap: 8px;
+  }
+
+  .form-field label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+  }
+
+  .form-field input,
+  .form-field textarea{
+    width: 100%;
+    min-width: 0;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    padding: 13px 14px;
+    font: inherit;
+    font-size: 14px;
+    border-radius: 0;
+  }
+
+  .form-field textarea{
+    min-height: 140px;
+    resize: vertical;
+  }
+
+  .form-field input:focus,
+  .form-field textarea:focus{
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+
+  .message-form button{
+    justify-self: start;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+  }
+
   .contact-panel{
     border: 1px solid var(--ink);
     padding: 44px;
@@ -523,6 +587,21 @@
     .about-copy p:first-child{
       font-size: 15px;
       line-height: 1.65;
+    }
+
+    .message-section{
+      padding-top: 32px;
+    }
+
+    .message-form{
+      padding: 20px 18px;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .message-form .cta-stamp{
+      width: fit-content;
+      max-width: 100%;
     }
 
     .contact-panel{
@@ -787,6 +866,42 @@
     <div class="about-copy" style="max-width: 62ch;">
       <p>I'm someone who's still becoming the person I want to be, and building is how I get there. I don't build projects just to complete assignments — I build products to solve real problems. Every project teaches me something new, whether it's a technology, a better workflow, or a different way of thinking. My long-term goal is to turn ideas into products that people genuinely use and value, and one day grow them into businesses that make a meaningful impact.</p>
     </div>
+  </section>
+
+  <section id="message">
+    <div class="section-head">
+      <h2 class="section-title">Send a message</h2>
+      <div class="count-tag">GET IN TOUCH</div>
+    </div>
+
+    <form class="message-form reg-corners"
+          action="https://formsubmit.co/kulkarni.aryan247@gmail.com"
+          method="POST">
+      <p class="form-intro">
+        Have an idea, a collaboration proposal, or an opportunity? Send me a message directly through this form.
+      </p>
+
+      <input type="hidden" name="_subject" value="New portfolio message">
+      <input type="hidden" name="_captcha" value="true">
+      <input type="hidden" name="_template" value="table">
+
+      <div class="form-field">
+        <label for="visitor-name">Name</label>
+        <input id="visitor-name" name="name" type="text" autocomplete="name" required>
+      </div>
+
+      <div class="form-field">
+        <label for="visitor-email">Email</label>
+        <input id="visitor-email" name="email" type="email" autocomplete="email" required>
+      </div>
+
+      <div class="form-field">
+        <label for="visitor-message">Message</label>
+        <textarea id="visitor-message" name="message" required></textarea>
+      </div>
+
+      <button class="cta-stamp" type="submit">Send message →</button>
+    </form>
   </section>
 
   <section id="contact">
