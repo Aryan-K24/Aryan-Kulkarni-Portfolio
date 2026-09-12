@@ -327,6 +327,225 @@
     nav.links a:nth-child(3){ display:none; }
   }
 
+
+  /* Responsive improvements for phones and narrow screens */
+  @media (max-width: 600px){
+    html, body{
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    header.nav{
+      padding: 14px 16px;
+      gap: 12px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .brand{
+      font-size: 15px;
+      line-height: 1.35;
+      max-width: 145px;
+    }
+
+    nav.links{
+      flex: 1 1 100%;
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+    }
+
+    nav.links a{
+      font-size: 11px;
+      min-height: 28px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    nav.links a:nth-child(3){
+      display: inline-flex;
+    }
+
+    .hero{
+      padding: 42px 18px 38px;
+    }
+
+    .hero-top{
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow{
+      font-size: 10px;
+      max-width: 60%;
+    }
+
+    .rev-stamp{
+      font-size: 9px;
+      padding: 5px 8px;
+    }
+
+    h1.title{
+      font-size: clamp(38px, 11vw, 58px);
+      max-width: 100%;
+    }
+
+    .hero-sub{
+      gap: 22px;
+      margin-top: 30px;
+      padding-top: 20px;
+    }
+
+    .hero-desc{
+      font-size: 15px;
+      line-height: 1.65;
+      max-width: 100%;
+    }
+
+    .cta-stamp{
+      width: fit-content;
+      max-width: 100%;
+      padding: 14px 18px;
+      font-size: 12px;
+      white-space: normal;
+    }
+
+    section{
+      padding: 38px 16px;
+    }
+
+    .section-head{
+      margin-bottom: 26px;
+      gap: 8px;
+    }
+
+    h2.section-title{
+      font-size: 27px;
+    }
+
+    .count-tag{
+      font-size: 10px;
+    }
+
+    .spec-card{
+      min-width: 0;
+      padding: 22px 18px 20px;
+    }
+
+    .spec-card-head{
+      flex-wrap: wrap;
+    }
+
+    .spec-card h3{
+      font-size: 20px;
+    }
+
+    .spec-card p.desc{
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .spec-links{
+      flex-wrap: wrap;
+      gap: 12px 16px;
+    }
+
+    .spec-links a{
+      font-size: 11px;
+      min-height: 28px;
+      align-items: center;
+    }
+
+    .about-wrap{
+      gap: 24px;
+    }
+
+    .log-entry{
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .log-date{
+      width: 62px;
+      font-size: 10px;
+    }
+
+    .log-text{
+      min-width: 0;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .about-copy p,
+    .about-copy p:first-child{
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .contact-panel{
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      padding: 24px 18px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 28px;
+    }
+
+    .contact-left h2{
+      font-size: 32px;
+      line-height: 1.1;
+    }
+
+    .contact-left p{
+      font-size: 14px;
+      line-height: 1.65;
+      max-width: 100%;
+    }
+
+    .contact-list{
+      min-width: 0;
+      width: 100%;
+    }
+
+    .contact-row{
+      width: 100%;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 7px;
+      padding: 14px 0;
+      font-size: 12px;
+    }
+
+    .contact-row span.label{
+      font-size: 10px;
+    }
+
+    .contact-row a{
+      display: block;
+      max-width: 100%;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      line-height: 1.55;
+    }
+
+    .contact-row.highlight{
+      margin: 0;
+      padding: 14px 10px;
+    }
+
+    footer{
+      padding: 28px 16px 36px;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior: auto; }
     *{ transition: none !important; }
@@ -390,7 +609,8 @@
           <span class="stack-tag">Android TWA</span>
         </div>
         <div class="spec-links">
-          <a href="https://budgetbuddytrackerapp.netlify.app" target="_blank" rel="noopener">Live app</a>
+          <a href="https://play.google.com/store/apps/details?id=app.budgetbuddy.finance" target="_blank" rel="noopener">Play Store</a>
+          <a href="https://budgetbuddytrackerapp.netlify.app" target="_blank" rel="noopener">Web app</a>
           <a href="https://github.com/Aryan-K24/budget-buddy" target="_blank" rel="noopener">Source</a>
         </div>
       </div>
@@ -550,7 +770,7 @@
         </div>
         <div class="contact-row">
           <span class="label">Résumé</span>
-          <a href= "Aryan_Kulkarni_Resume updated.pdf" download>Download PDF</a>
+          <a href="Aryan_Kulkarni_Resume updated.pdf" download>Download PDF</a>
         </div>
       </div>
     </div>
