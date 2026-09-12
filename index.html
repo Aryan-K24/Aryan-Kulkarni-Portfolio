@@ -94,6 +94,18 @@
     letter-spacing: -0.01em;
   }
   .brand span{ color: var(--signal); }
+
+  .brand{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+  }
+
+  .brand span{
+    color: var(--signal);
+  }
+
   nav.links{ display: flex; gap: 32px; }
   nav.links a{
     font-family: 'IBM Plex Mono', monospace;
@@ -145,11 +157,11 @@
   h1.title .accent{ color: var(--blue); }
 
   .hero-sub{
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
     margin-top: 44px;
-    align-items: end;
     border-top: 1px solid var(--line-faint);
     padding-top: 28px;
   }
@@ -392,6 +404,27 @@
       max-width: 100%;
     }
 
+
+    .brand{
+      line-height: 1.25;
+      max-width: 170px;
+    }
+
+    .brand > div{
+      white-space: nowrap;
+    }
+
+    .hero-desc{
+      width: 100%;
+      margin: 0;
+    }
+
+    .hero-sub .cta-stamp{
+      display: inline-flex;
+      align-self: flex-start;
+      margin-top: 0 !important;
+    }
+
     .hero-sub{
       gap: 22px;
       margin-top: 30px;
@@ -560,7 +593,10 @@
 <body>
 
   <header class="nav">
-    <div class="brand">ARYAN KULKARNI <span>//</span> BUILD LOG</div>
+    <div class="brand">
+      <div>ARYAN KULKARNI</div>
+      <div><span>//</span> BUILD LOG</div>
+    </div>
     <nav class="links">
       <a href="#projects">Projects</a>
       <a href="#about">About</a>
@@ -584,7 +620,7 @@
       <p class="hero-desc">
         Six deployed products across finance, e-commerce, education, and AI tooling. I don't stop at the notebook—I ship products, learn from real users, and keep improving them.
       
-      <a class="cta-stamp" style="margin-top: 20px;" href="#contact">Get in touch ↓</a>
+      <a class="cta-stamp" href="#contact">Get in touch ↓</a>
     </div>
   </section>
 
